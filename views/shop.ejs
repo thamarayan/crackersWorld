@@ -1,0 +1,242 @@
+<%- include('./partials/header.ejs') %>
+
+<img src="/images/bgbanner.jpg" alt="" class="img-fluid">
+<section id="shop">
+  <form action="/addProducts" method="post">
+    <div class="container-fluid cf-shop">
+        <div class="row">
+          <div class="container-fluid sticky-top cf-billBoard">
+            <div class="row billBoard">
+              
+                <div class="col-md-4 col-4">
+                  <h3 class="billBoardH3">Items : <span id="totalProducts"></span></h3>
+                </div>
+                <div class="col-md-4 col-4">
+                  <h3 class="billBoardH3">Savings : <span id="discountTotal"></span></h3>
+                </div>
+                <div class="col-md-4 col-4">
+                  <h3 class="billBoardH3">Bill Value : <span id="overallTotal"></span></h3>
+                </div>
+              
+            </div>
+          </div>
+            <div class="col-md-12 col-12 subHead">
+                <h1 class="shopH1">Price List - 2022 <br> <span class="discInfo">( 75% DISCOUNT )</span></h1>
+                <p style="color: black; text-align: center;"><strong>Minimum Order Value : ₹3000/-</strong></p>
+            </div>
+
+            <!-- Sound Crackers -->
+            <div class="col-md-12 row">
+              
+              <% products.forEach((product,index) => { %>
+              
+            
+                  <div class="col-md-4">
+                    <div class="card mb-3" style="max-width: 540px;" >
+                        <div class="row g-0">
+                          <div class="col-md-4 leftCard">
+                            <img src="/images/defProdImg.jpg" class="img-fluid rounded-start" alt="...">
+                          </div>
+                          <div class="col-md-8">
+                            <div class="card-body relative">
+                              <h5 class="card-title"><%=product.name%></h5>
+                              <p class="card-text"><%=product.type%></p>
+                              <p class="card-text"><span class="origPrice">₹<%=product.actualPrice%>/-</span> &nbsp; <span class="discPrice">₹<%=product.discountPrice%>/-</span></p>
+
+                             
+                              
+                             
+                                <input class="form-control w-50 quantity" style="display:inline-block" type="text" name="qty" id="qty" min="0" defaultValue=0 inputmode="numeric" onkeyup="doMath('<%=index%>')" value placeholder="count">
+                               
+
+                              
+                              <span class="badge text-bg-warning bottom-right spanMsg">₹<p id="tempTotal_<%=index%>" style="margin-bottom:0px">/-</p></span>
+  
+                              <input type="hidden" name="actualValue" id="actualValue_<%=index%>" value="<%= product.actualPrice %>">
+                              <input type="hidden" name="priceValue" id="priceValue_<%=index%>" value="<%= product.discountPrice %>">
+                              <input type="hidden" name="actSubTotal" id="actSubTotal_<%=index%>" value>
+                              <input type="hidden" name="netSavings" id="netSavings_<%=index%>" value>
+                              <input type="hidden" name="discSubTotal" id="discSubTotal_<%=index%>" value>
+                              <input type="hidden" name="ids" id="ids" value="<%=product._id%>">
+                              <input type="hidden" name="name" id="name" value="<%=product.name%>">
+                              <input type="hidden" name="type" id="type" value="<%=product.type%>">
+                              <input type="hidden" name="aPrice" id="aPrice" value="<%=product.actualPrice%>">
+                              <input type="hidden" name="dPrice" id="dPrice" value="<%=product.discountPrice%>">
+                              <input type="hidden" name="content" id="content" value="<%=product.content%>">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+               
+               
+              <% }) %>
+            
+            </div>
+
+
+
+            <div class="row" style="padding-top: 3% !important;">
+              <div class="col-md-6">
+                <h4 style="text-align: left; color: red;">Shipping Details</h4>
+                <div class="mb-3">
+                  <input type="text" pattern="[A-Za-z ]{1,32}" class="form-control"  name="partyName"  id="partyName" required placeholder="Name">
+                </div>
+                <div class="mb-3">
+                  <input pattern="[6789][0-9]{9}" type="text" class="form-control" name="partyMob" id="partyMob" required placeholder="Contact">
+                </div>
+                <div class="mb-3">
+                  <input type="email" class="form-control" name="partyEmail" id="partyEmail" required placeholder="Email">
+                </div>
+                <div class="mb-3">
+                  <textarea class="form-control" id="partyAddress" name="partyAddress" rows="3" required placeholder="Address"></textarea>
+                </div>
+              </div>
+        
+              <div class="col-md-6">
+                <h4 style="text-align: center; color: red;">Bill Detials</h4>
+                <table class="table" id="paisaDetails" style="text-align: right; padding: 2rem 5rem !important;">
+                 
+                  <tbody>
+                    <tr>
+                      <th scope="col">Net Total</th>
+                      <td><p style="margin-bottom: 0px;" id="overallTotall"></p></td>
+                      <input type="hidden" name="overallTotalVal" id="overallTotalVal" value>
+                    </tr>
+        
+                    <tr>
+                      <th scope="col">Discount Total</th>
+                      <td><p style="margin-bottom: 0px;" id="discountTotall"></p></td>
+                      <input type="hidden" name="discountTotalVal" id="discountTotalVal" value>
+                    </tr>
+        
+                    <tr>
+                      <th scope="col">Amt Payable</th>
+                      <td><p style="margin-bottom: 0px;" id="subTotall"></p></td>
+                      <input type="hidden" name="subTotalVal" id="subTotalVal" value>
+                    </tr>
+        
+                    <tr>
+                      <th scope="col">Min Order Value</th>
+                      <td><p style="margin-bottom: 0px; color: red; font-weight: bold;">&#8377; 3,000.00</p></td>
+                    </tr>
+        
+                    <tr>
+                      <th scope="col">Packing Charge (3%)</th>
+                      <td><p style="margin-bottom: 0px;" id="pckCharge"></p></td>
+                      <input type="hidden" name="pckChargeVal" id="pckChargeVal" value>
+                    </tr>
+        
+                    <tr>
+                      <th scope="col">Overall Total</th>
+                      <td><p style="margin-bottom: 0px; font-weight: bold; color: red;" id="finalBillValue"></p></td>
+                      <input type="hidden" name="finalBillValuee" id="finalBillValuee" value>
+                    </tr>
+        
+                    <tr>
+                      <th></th>
+                      <td><button type="submit" style="text-align:right;" id="submitButton" disabled class="btn btn-sm btn-warning">Submit</button></td>
+                    </tr>
+        
+                  </tbody>
+                </table>
+                
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+    
+
+    <div id="bottom">
+      <a role="button" href="/shop#paisaDetails" id="bot_open" class="btn btn-danger btn-sm">Cart <br> &#8377 
+     <span id="totalItems">0</span>
+      </a>
+    </div>
+  
+</section>
+
+
+<script>
+  function doMath(i) {
+
+    var quantities = document.getElementsByClassName('quantity');
+   
+    // To calculate row wise subtotal and actual price
+    var numOne = document.getElementById('priceValue_'+i).value;
+    var numTwo = quantities[i].value;
+    var numThree = document.getElementById('actualValue_'+i).value;
+    
+    var discValue = Number(numOne) * Number(numTwo);
+    var actValue = Number(numThree) * Number(numTwo);
+
+       
+    document.getElementById('tempTotal_'+i).innerHTML = discValue;
+    document.getElementById('actSubTotal_'+i).value = actValue;
+    document.getElementById('discSubTotal_'+i).value = discValue;
+    document.getElementById('netSavings_'+i).value = actValue - discValue;
+   
+
+    var netTotal = 0;
+    for(i=0; i<quantities.length;i++){
+      netTotal += Number(document.getElementById('actSubTotal_' + i).value);
+    }
+    document.getElementById('overallTotall').innerHTML = "&#8377;" + netTotal;
+    document.getElementById('overallTotalVal').value = netTotal; 
+
+    // To calculate total products quantity
+    var tempQty = 0;
+    for(i=0; i<quantities.length;i++){
+      tempQty += Number(quantities[i].value);
+    }
+    console.log(tempQty);
+    document.getElementById('totalProducts').innerHTML =  tempQty;
+
+    // To Calculate total bill value
+    var discountedBillValue = 0;
+    for(i=0; i<quantities.length;i++){
+      discountedBillValue += Number(document.getElementById('discSubTotal_'+i).value);
+    }
+    document.getElementById('overallTotal').innerHTML =  discountedBillValue;
+    document.getElementById('totalItems').innerHTML =  discountedBillValue;
+
+    // To Calculate savings value
+    var savingsValue = 0;
+    for(i=0; i<quantities.length;i++){
+      savingsValue += Number(document.getElementById('netSavings_'+i).value);
+    }
+    document.getElementById('discountTotal').innerHTML =  "&#8377;" + savingsValue;
+    document.getElementById('discountTotall').innerHTML ="&#8377;" +  savingsValue;
+    document.getElementById('discountTotalVal').value = savingsValue;
+
+    var tempSum = 0;
+    for(i=0; i<quantities.length;i++){
+      Math.round(tempSum += Number(document.getElementById('discSubTotal_'+i).value));
+    }
+    // document.getElementById('totalBillValue').value = tempSum.toFixed(2);
+    document.getElementById('overallTotal').innerHTML =  "&#8377;" + tempSum.toFixed(2);
+    document.getElementById('subTotall').innerHTML =  "&#8377;" + tempSum.toFixed(2);
+    document.getElementById('subTotalVal').value =  tempSum.toFixed(2);
+
+    var pckCharg = tempSum * 0.03;
+    document.getElementById('pckCharge').innerHTML="&#8377;" + pckCharg.toFixed(2);
+    document.getElementById('pckChargeVal').value= pckCharg.toFixed(2);
+    
+    var finalBillValue = tempSum + pckCharg;
+    document.getElementById('finalBillValue').innerHTML="&#8377;" + Math.round(finalBillValue).toFixed(2);
+    document.getElementById('finalBillValuee').value= Math.round(finalBillValue);
+
+    if(finalBillValue >= 3000){
+      document.getElementById('submitButton').disabled = false;
+    }
+    else {
+      document.getElementById('submitButton').disabled = true;
+    }
+   
+    }
+
+    
+</script>
+
+
+<%- include('./partials/footer.ejs') %>

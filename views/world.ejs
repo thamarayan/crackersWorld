@@ -1,0 +1,151 @@
+<%- include('./partials/header.ejs') %>
+
+
+<section id="controls">
+    <div class="container-fluid cf-controls">
+        <div class="row">
+            <h1>Dashboard</h1>
+            <div class="col-md-4">
+                <a href="/productsControl" role="button" class="btn btn-sm btn-warning">Products</a>
+            </div>
+            <div class="col-md-4">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Add New Product
+                </button>
+    
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add a new product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/newProduct" method="post">
+                                <input type="text" class="form-control" name="prodName" id="prodName" placeholder="Name" value required>
+                                <input type="text" class="form-control" name="prodContent" id="prodContent" placeholder="Content" value required>
+                                <input type="text" class="form-control" name="prodType" id="prodType" placeholder="Type" value required>
+                                <input type="number" class="form-control" name="prodActPrice" id="prodActPrice" placeholder="Actual Price" value required>
+                                <input type="number" class="form-control" name="prodDiscPrice" id="prodDiscPrice" placeholder="Discount Price" required value>
+                                
+                                <button type="submit" class="btn btn-sm btn-success">Add Product</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <form action="/changeDiscount" method="post">
+                    <input type="number" name="discValue" id="discValue" value>
+                    <button href="/discountChange" type="submit" class="btn btn-sm btn-danger">Change Discount</>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="productsList">
+    <div class="container-fluid cf-productsList">
+        <div class="row">
+            <div class="col-md-12">
+                <% if (products.length > 0) { %>
+               
+                  
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Content</th>
+                            <th scope="col">Actual Price</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Availability</th>
+                            <th scope="col">Update</th>
+                            <th scope="col">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <% products.forEach(product => { %>
+                            <tr>
+                            <td data-label="Name" class="mobile-display"><%= product.name %></td>
+                            <td data-label="Type" class="mobile-hidden"><%= product.type %></td>
+                            <td data-label="Content" class="mobile-hidden"><%= product.content %></td>
+                            <td data-label="Actual Price"><h6 class="strike">&#8377;<%= product.actualPrice %></h6></td>
+                            <td data-label="Amount" class="mobile-display">&#8377;<%= product.discountPrice %></td>      
+                            <td>
+                                <% if (product.availability) { %>
+                                 <a href="/makeAvailable/<%=product._id%>" role="button" class="btn btn-sm btn-success">Available?</a>
+                                <% } else { %>
+                                 <a href="/makeUnavailable/<%=product._id%>" role="button" class="btn btn-sm btn-danger">Make Unavailable?</a> 
+                                <% } %>
+                            </td>
+                            <td>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-<%=product._id%>">
+                                    Update
+                                </button>
+  
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal-<%=product._id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Update <%=product.name%></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/update/<%=product._id%>" method="post">
+                                                <input type="text" class="input-group" name="newName" id="newName" value="<%=product.name%>"> <br>
+                                                <input type="text" class="input-group" name="newContent" id="newContent" value="<%=product.content%>"> <br>
+                                                <input type="text" class="input-group" name="newActualPrice" id="newActualPrice" value="<%=product.actualPrice%>"> <br>
+                                                <input type="text" class="input-group" name="newDiscountPrice" id="newDiscountPrice" value="<%=product.discountPrice%>"><br>
+                                                <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="/deleteProduct/<%=product._id%>" type="button" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></a>
+                            </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                
+               
+                <% } %>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include('./partials/footer.ejs') %>

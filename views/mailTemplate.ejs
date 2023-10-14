@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+              /* Top Section */
+              /* Billing INvoice */
+              /* Billing TO */
+              /* Invoice Table */
+    </style>
+  </head>
+  <body style="margin:0;padding:0;font-size:16px;font-weight:300px;background-color:rgb(204,204,204);font-family:'Roboto', sans-serif;">
+    <div class="page" size="A4" style="background:#fff;display:block;margin:3rem auto 3rem auto;position:relative;box-shadow:0 0 0.5cm rgba(0,0,0,0.5);width:21cm;height:29.7cm;overflow-x:hidden;">
+      <!-- Top Section -->
+      <div class="top-section" style="color:#fff;padding:20px;height:115px;background-color:#6a1b9a;">
+        <div class="address" style="width:50%;height:100%;float:left;">
+          <div class="address-content">
+            <h2 style="margin:0;font-size:36px;margin-bottom:10px;font-weight:400;padding-bottom:0% ;">CRACKERS WORLD</h2>
+            <p style="margin:0;">Sivakasi.</p>
+          </div>
+        </div>
+        <div class="contact" style="width:50%;height:100%;float:left;">
+          <div class="contact-content" style="float:right;margin-top:32px;">
+            <div class="email" style="display:block;">
+              Email : <span style="margin-left:30px;text-decoration:none !important; color:white !important;">thamarayan@gmail.com</span>
+            </div>
+            <div class="number" style="display:block;">
+              Contact : <span class="span" style="margin-left:30px;">6383841383</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Billing Invoice -->
+      <div class="billing-invoice" style="padding:20px;font-size:20px;margin-bottom:15px;">
+        <div class="title" style="font-weight:400;float:left;">
+          ESTIMATE
+        </div>
+        <div class="des" style="font-weight:400;float:right;">
+          <!-- <p class="code" style="margin:0;font-weight:700;text-align:right;">
+            Code Number
+          </p> -->
+          <p class="issue" style="margin:0;text-align:right;font-size:15px;">
+            Issued : <span> <%= cart[0].date %> </span>
+          </p>
+        </div>
+      </div>
+      <!-- Billed To -->
+      <div class="billing-to" style="padding:20px;margin-top:40px;">
+        <div class="title" style="font-weight:400;font-size:20px;margin-bottom:7px;">
+          Billed To
+        </div>
+        <div class="billed-sec" style="width:50%;float:left;font-size:18px;margin-bottom:25px;">
+          <div class="sub-title" style="font-weight:400;font-size:18px;margin-bottom:5px;">
+            <div class="name" style="font-weight:400;font-size:18px;margin-bottom:5px;font-weight:bold;color:#6a1b9a;font-family: 'Roboto', sans-serif;">
+              <%=cart[0].partyName%>
+            </div>
+            <p style="margin:0;font-family: 'Roboto', sans-serif;"><%=cart[0].partyEmail%></p>
+            <p style="margin:0;font-family: 'Roboto', sans-serif;"><%=cart[0].partyMob%></p>
+            <p style="margin:0;font-family: 'Roboto', sans-serif;"><%=cart[0].partyAddress%></p>
+          </div>
+        </div>
+        <div class="billed-sec" style="width:50%;float:left;font-size:18px;margin-bottom:25px;">
+          <div class="sub-title" style="font-weight:400;font-size:18px;margin-bottom:5px;">
+            <div class="name" style="font-weight:400;font-size:18px;margin-bottom:5px;font-weight:bold;color:#6a1b9a;">
+              Bank Details
+            </div>
+            <p style="margin:0;"><span style="color:#6a1b9a;">Account Name:</span> R Srinidhi</p>
+            <p style="margin:0;"><span style="color:#6a1b9a;">Account Number:</span> 64312200073149</p>
+            <p style="margin:0;"><span style="color:#6a1b9a;">Account Type:</span> Savings Account</p>
+            <p style="margin:0;"><span style="color:#6a1b9a;">Bank Name:</span> Canara Bank, Sivakasi</p>
+            <p style="margin:0;"><span style="color:#6a1b9a;">IFSC Code:</span> CNRB0016431</p>
+          </div>
+          <div class="ship-add" style="max-width:300px;">
+            <p style="margin:0;"><span style="color:#6a1b9a;">UPI ID</span> 9500681403@upi</p>
+            <p style="margin:0;"><span style="color:#6a1b9a;">GPay No</span> 9500681403</p>
+          </div>
+        </div>
+      </div>
+      <!-- Invoice Table -->
+      <div class="table" style="padding:0 20px;">
+        <table style="width:100%;padding:5px;text-align:center;border:1px solid #616161;border-collapse:collapse;">
+          <tr style="color:#fff;background-color:#6a1b9a;">
+           
+            <th style="padding:5px;text-align:center;border:1px solid #616161;border-collapse:collapse;font-size:18px;font-weight:400;text-align:left;width:230px;">Product Name</th>
+            <th style="padding:5px;text-align:center;border:1px solid #616161;border-collapse:collapse;font-size:18px;font-weight:400;">Content</th>
+            <th style="padding:5px;text-align:center;border:1px solid #616161;border-collapse:collapse;font-size:18px;font-weight:400;">Quantity</th>
+            <th style="padding:5px;text-align:center;border:1px solid #616161;border-collapse:collapse;font-size:18px;font-weight:400;">Rate</th>
+            <th style="padding:5px;text-align:center;border:1px solid #616161;border-collapse:collapse;font-size:18px;font-weight:400;">Discount Rate</th>
+            <th style="padding:5px;text-align:center;border:1px solid #616161;border-collapse:collapse;font-size:18px;font-weight:400;">Amount</th>
+          </tr>
+          <% items.forEach(item => { %>
+            <tr>
+                
+                <td style="padding:5px;text-align:center;border:1px solid #616161;border-collapse:collapse;text-align:left;width:230px;"><%=item.name%></td>
+                <td style="padding:5px;text-align:center;border:1px solid #616161;border-collapse:collapse;"><%=item.content%></td>
+                <td style="padding:5px;text-align:center;border:1px solid #616161;border-collapse:collapse;"><%=item.quantity%></td>
+                <td style="padding:5px;text-align:center;border:1px solid #616161;border-collapse:collapse;">&#8377;<%=item.aprice%></td>
+                <td style="padding:5px;text-align:center;border:1px solid #616161;border-collapse:collapse;">&#8377;<%=item.price%></td>
+                <td style="padding:5px;text-align:center;border:1px solid #616161;border-collapse:collapse;">&#8377;<%=item.amount%></td>
+              </tr>
+          <% }) %>
+          
+          
+        </table>
+      </div>
+      <div class="billDetails" style="padding:20px 30px 20px 20px;text-align:right;">
+        <p style="margin:0;padding-bottom:5px;"><span style="font-weight:bold;color:#6a1b9a;">SubTotal (A): </span> ₹ <%=cart[0].netValue%></p>
+        <p style="margin:0;padding-bottom:5px;"><span style="font-weight:bold;color:#6a1b9a;">Discount 75% (B): </span> ₹ <%=cart[0].savings%></p>
+        <p style="margin:0;padding-bottom:5px;"><span style="font-weight:bold;color:#6a1b9a;">Total (C = A-B): </span> ₹ <%=cart[0].subTotal%></p>
+        <p style="margin:0;padding-bottom:5px;"><span style="font-weight:bold;color:#6a1b9a;">Packing Charge 3% (D):</span> ₹ <%=cart[0].packingCharge%></p>
+        <p style="margin:0;padding-bottom:5px;"><span style="font-weight:bold;color:#6a1b9a;">Overall Total (C+D): </span> ₹ <span style="color: red; font-weight:bold"><%=cart[0].finalBillvalue%></span></p>
+        <p style="margin:0;padding-bottom:5px;"><span style="font-weight:bold;color:#6a1b9a;">Total Items: </span><%=cart[0].itemsQty%> </p>
+      </div>
+      <!-- Bottom Section -->
+      <div class="bottom-section">
+        <div class="status-content">
+          <p style="margin:0;padding:20px;text-align:center;">Thank you for the query. Expecting your valuable order - <span style="font-weight:bold;color:#6a1b9a;">Crackers World</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
