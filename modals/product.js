@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var schema = new Schema({
+    code:{type:Number},
     name: {type:String, required:true},
     content:{type:String, required:true},
     type:{type:String, required:true},

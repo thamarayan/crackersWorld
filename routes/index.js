@@ -42,7 +42,7 @@ router.get('/shop', function(req, res, next) {
       console.log(err);
     }
     res.render('shop', { title: 'Shop | Crackers World', products:result });
-  })
+  }).sort({code:1})
 });
 
 router.post('/addProducts', function(req,res,next){
@@ -159,7 +159,7 @@ router.get('/productsControl', function(req,res,next){
       return res.render('world', {products:[]});
     }
     res.render('world',{title:'Products | Crackers World', products:result});
-  })
+  }).sort({code:1});
 })
 
 router.post('/update/:id', function(req,res,next){
@@ -167,6 +167,7 @@ router.post('/update/:id', function(req,res,next){
   Product.updateOne(
     {_id:id},
     {$set: {
+      code: req.body.code,
       name: req.body.newName,
       content: req.body.newContent,
       actualPrice: req.body.newActualPrice,
@@ -238,6 +239,7 @@ router.post('/changeDiscount', function(req,res,next){
 router.post('/newProduct', function(req,res,next){
 
   var product = new Product({
+    code : req.body.prodCode,
     name : req.body.prodName,
     content : req.body.prodContent,
     type : req.body.prodType,
@@ -254,7 +256,6 @@ router.post('/newProduct', function(req,res,next){
 })
 
 } )
-
 
 router.get('/deleteProduct/:id', function(req,res,next){
   var id = req.params.id;

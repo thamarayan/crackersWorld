@@ -24,6 +24,7 @@
                         </div>
                         <div class="modal-body">
                             <form action="/newProduct" method="post">
+                                <input type="text" class="form-control" name="prodCode" id="prodCode" placeholder="Code" value required>
                                 <input type="text" class="form-control" name="prodName" id="prodName" placeholder="Name" value required>
                                 <input type="text" class="form-control" name="prodContent" id="prodContent" placeholder="Content" value required>
                                 <input type="text" class="form-control" name="prodType" id="prodType" placeholder="Type" value required>
@@ -61,6 +62,7 @@
                     <table class="table">
                         <thead>
                           <tr>
+                            <th scope="col">Code</th>
                             <th scope="col">Name</th>
                             <th scope="col">Type</th>
                             <th scope="col">Content</th>
@@ -74,6 +76,7 @@
                         <tbody>
                             <% products.forEach(product => { %>
                             <tr>
+                            <td data-label="Code" class="mobile-display"><%= product.code %></td>
                             <td data-label="Name" class="mobile-display"><%= product.name %></td>
                             <td data-label="Type" class="mobile-hidden"><%= product.type %></td>
                             <td data-label="Content" class="mobile-hidden"><%= product.content %></td>
@@ -102,6 +105,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form action="/update/<%=product._id%>" method="post">
+                                                <input type="number" class="input-group" name="code" id="code" value="<%=product.code%>"> <br>
                                                 <input type="text" class="input-group" name="newName" id="newName" value="<%=product.name%>"> <br>
                                                 <input type="text" class="input-group" name="newContent" id="newContent" value="<%=product.content%>"> <br>
                                                 <input type="text" class="input-group" name="newActualPrice" id="newActualPrice" value="<%=product.actualPrice%>"> <br>
