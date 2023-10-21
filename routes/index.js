@@ -5,6 +5,40 @@ var ejs = require("ejs");
 var nodemailer = require('nodemailer');
 const {google} = require('googleapis');
 var path = require('path');
+var multer = require('multer');
+
+var storage = multer.diskStorage({
+  destination: function(req,file,cb){
+      cb(null, './public/images/');
+  },
+  filename: function(req,file, cb){
+      cb(null, file.originalname);
+  }
+});
+
+var fileFilter = (req, file, cb) => {
+  if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png'){
+      cb(null,true);
+  }
+  else{
+      cb(null,false);
+  }
+  
+}
+
+var upload = multer({
+  storage:storage,
+  limits:{fileSize: 1024 * 1024 * 2},
+  fileFilter: fileFilter
+});
+
+const cloudinary = require('cloudinary').v2;
+        
+cloudinary.config({ 
+cloud_name: 'dzxkki5ct', 
+api_key: '754672878898589', 
+api_secret: 'edb9rL_X3yCC1ZUaIEakOas76uM' 
+});
 
 
 const CLIENT_ID = '896512013094-m16n5h4nk5rfk59549fnumino8pgclge.apps.googleusercontent.com'
@@ -180,6 +214,29 @@ router.post('/update/:id', function(req,res,next){
       res.redirect('/productsControl');
     })
 })
+
+router.post('/updateImg/:id', upload.single('prodImage'), function(req,res,next){
+  var id = req.params.id;
+
+  cloudinary.uploader.upload(req.file.path, function(err, result){
+
+    Product.updateOne(
+      {_id:id},
+      {$set: {
+        imagePath : result.url,
+      }}, function(err,ress){
+        if(err){
+          console.log(err);
+          return res.render('world', {products:[], title:'Control | Arunjunai Traders'});
+        }
+        res.redirect('/world');
+      })
+
+  })
+
+  
+})
+
 
 router.get('/makeAvailable/:id', function(req,res,next){
   var id=req.params.id;

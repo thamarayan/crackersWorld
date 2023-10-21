@@ -70,6 +70,7 @@
                             <th scope="col">Amount</th>
                             <th scope="col">Availability</th>
                             <th scope="col">Update</th>
+                            <th scope="col">Image</th>
                             <th scope="col">Delete</th>
                           </tr>
                         </thead>
@@ -110,6 +111,33 @@
                                                 <input type="text" class="input-group" name="newContent" id="newContent" value="<%=product.content%>"> <br>
                                                 <input type="text" class="input-group" name="newActualPrice" id="newActualPrice" value="<%=product.actualPrice%>"> <br>
                                                 <input type="text" class="input-group" name="newDiscountPrice" id="newDiscountPrice" value="<%=product.discountPrice%>"><br>
+                                                <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1-<%=product._id%>">
+                                    Image
+                                </button>
+  
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal1-<%=product._id%>" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel1">Update <%=product.name%></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/updateImg/<%=product._id%>" method="post"  enctype="multipart/form-data">
+                                                <input type="file" class="form-control form-control mb-3" name="prodImage" id="prodImage">
                                                 <button type="submit" class="btn btn-sm btn-primary">Update</button>
                                             </form>
                                         </div>
